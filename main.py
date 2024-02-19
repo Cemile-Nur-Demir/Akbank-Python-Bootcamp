@@ -32,25 +32,19 @@ class Kutuphane:
 
     def kitapSil(self):
                 sil_adi = input("Silinmesini istediğin kitabı girin =")                       
-                with open("cook.txt") as f:                                    # açılan dosyadan işlem olmadığından tekrar açıp kapanması sağlandı(SADECE BU FUNC İÇİN)
+                with open("cook.txt","r+") as f:                           # açılan dosyadan işlem olmadığından tekrar açıp kapanması sağlandı(SADECE BU FUNC İÇİN)
                   for x in f.readlines():                                  # dosyadan verileri okuduk
-                    for y in (x.splitlines()):                              # verileri satır sayır ayırdık
-                     self.indis=y.find(",")                             # ilk virgülü bulduk 
-                     if self.indis != -1:                               # ilk virgül bulunduysa
-                         indis1 = y.find(",", self.indis + 1)           # ikinci virgülün indisini bularak kitabın yazarına ulaşacağız
-
-                     if y[2:self.indis-1] == sil_adi:
-                          print("eşit")
-
-                    # indis_sil = y.find(sil_adi)
-
-
-
-
-
-                    # silinecek =self.dosya.read(self.kitap_list[:self.indis])
-                    # if sil_adi == silinecek:
-                    #    self.kitap_list.remove()
+                    print("HATA")                                          # hatanın nerede olduğunu anlamak için bakıyorum. Dosyadan okuma sonrasını çalıştırmıyor.
+                    for y in (x.splitlines()):                             
+                         print("HATA")   
+                         self.indis_Sil=y.find(sil_adi)                    # silinmesi istesen kitap adının başlangıç indisini bul                                                     
+                         if self.indis_Sil != -1:                          # eğer silinmesi istenen kitap dosyada varsa
+                             del y[:]                                      # remove yada pop bu y listinde kullanılamıyor o yüzden del kullanılarak tüm satır değerini sil
+ 
+                           #del ile silinmezse replace ile o satırı boş bırakalım.
+                           # self.dosya.write(y.replace(y[:],""))          
+                         else:                                             # dosyada öyle bir kitap yoksa
+                             print("Öyle bir kitap bulunmamaktadır")
         
 
     def __del__(self):
